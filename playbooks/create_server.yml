@@ -8,6 +8,12 @@
     SSH_KEY: "simon@hryszko.dev"
 
   tasks:
+    - name: Check if server exist
+      hcloud_server:
+        name: "{{ HETZNER_TYPE }}"
+        state: absent
+        token: "{{ HETZNER_TOKEN }}"
+
     - name: Create a new instance with an SSH key.
       hetzner.hcloud.hcloud_server:
         api_token: "{{ HETZNER_TOKEN }}"
@@ -19,3 +25,4 @@
           - "{{ SSH_KEY }}"
         state: present
       register: instance_data
+      when: instance_data is undefined
