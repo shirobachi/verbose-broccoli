@@ -30,4 +30,4 @@
           - "{{ SSH_KEY }}"
         state: present
       register: instance_data
-      when: server_info.hcloud_server_info.length == 0
+      when: server_info.hcloud_server_info | length == 0

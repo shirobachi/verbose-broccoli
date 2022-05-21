@@ -18,10 +18,10 @@ jobs:
       - name: Install dependencies
         run: pip3 install python-dateutil hcloud 
         
-      - name: Install dependencies
+      - name: Upgrade ansible
         run: pip3 install --upgrade ansible
         
-      - name: Run Ansible Playbook
+      - name: Create server
         run: ansible-playbook playbooks/create_server.yml
         env:
           HETZNER_TOKEN: ${{ secrets.HETZNER_TOKEN }}
