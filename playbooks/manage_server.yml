@@ -18,9 +18,6 @@
   gather_facts: False
 
   tasks:
-    - name: Wait for connection.
-      wait_for_connection:
-
     - name: install ranger
       apt:
         name: 
