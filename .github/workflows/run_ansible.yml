@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  create:
+  create-server:
     runs-on: ubuntu-latest
 
     steps:
