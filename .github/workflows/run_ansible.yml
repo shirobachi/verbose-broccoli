@@ -21,6 +21,11 @@ jobs:
       - name: Upgrade ansible
         run: pip3 install --upgrade ansible
         
+      - name: Set up SSH-Agent
+        uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
       - name: Create server
         run: ansible-playbook playbooks/create_server.yml
         env:

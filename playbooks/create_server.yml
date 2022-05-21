@@ -31,3 +31,15 @@
         state: present
       register: instance_data
       when: server_info.hcloud_server_info | length == 0
+
+    - name: Add created host to inventory
+      add_host:
+        name: "{{ instance_data.hcloud_server.ipv4_address }}"
+        groups: servers
+      when: instance_data is defined
+
+    - name: Add already exist host to inventory
+      add_host:
+        name: "{{ server_info.hcloud_server_info[0].ipv4_address }}"
+        groups: servers
+      when: server_info.hcloud_server_info | length > 0
