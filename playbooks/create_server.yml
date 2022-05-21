@@ -5,19 +5,19 @@
   vars: 
     HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
     HETZNER_TYPE: "cx11"
+    HETZNER_NAME: "hryszko.dev"
     SSH_KEY: "simon@hryszko.dev"
 
   tasks:
     - name: Check if server exist
-      hcloud_server:
-        name: "{{ HETZNER_TYPE }}"
-        state: absent
-        token: "{{ HETZNER_TOKEN }}"
+      hcloud_server_info:
+        api_token: "{{ HETZNER_TOKEN }}"
+        name: "{{ HETZNER_NAME }}"
 
     - name: Create a new instance with an SSH key.
       hetzner.hcloud.hcloud_server:
         api_token: "{{ HETZNER_TOKEN }}"
-        name: "hryszko.dev"
+        name: "{{ HETZNER_NAME }}"
         server_type: "{{ HETZNER_TYPE }}"
         image: ubuntu-20.04
         location: hel1
@@ -25,4 +25,4 @@
           - "{{ SSH_KEY }}"
         state: present
       register: instance_data
-      when: instance_data is undefined
+      when: not "{{ instance_data.server }}"
