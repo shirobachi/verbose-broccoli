@@ -13,7 +13,8 @@
       hcloud_server_info:
         api_token: "{{ HETZNER_TOKEN }}"
         name: "{{ HETZNER_NAME }}"
-      register: server_info.hcloud_server_info
+      register: server_info
+      debug: var=server_info.hcloud_server_info
 
     - name: Create a new instance with an SSH key.
       hetzner.hcloud.hcloud_server:
