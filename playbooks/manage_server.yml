@@ -3,7 +3,22 @@
   hosts: servers
   remote_user: root
   
+  vars: 
+    HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
+    HETZNER_NAME: "{{ lookup('env', 'HETZNER_NAME') }}"
+  
   tasks:
+    - name: Retrieve server
+      hcloud_server_info:
+        api_token: "{{ HETZNER_TOKEN }}"
+        name: "{{ HETZNER_NAME }}"
+      register: server_info
+
+    - name: Add host to inventory.
+      add_host:
+        name: "{{ server_info.hcloud_server_info[0].ipv4_address }}"
+        groups: servers
+
     - name: Wait for connection.
       wait_for_connection:
 

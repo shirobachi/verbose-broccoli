@@ -41,11 +41,8 @@ jobs:
           HETZNER_NAME: ${{ env.HETZNER_NAME }}
           HETZNER_SSH_KEY: ${{ env.HETZNER_SSH_KEY }}
 
-      - name: Add server to inventory
-        run: ansible-playbook playbooks/add_server_to_inventory.yml
+      - name: Manage server
+        run: ansible-playbook playbooks/manage_server.yml
         env:
           HETZNER_TOKEN: ${{ env.HETZNER_TOKEN }}
           HETZNER_NAME: ${{ env.HETZNER_NAME }}
-
-      - name: Manage server
-        run: ansible-playbook playbooks/manage_server.yml
