@@ -1,7 +1,6 @@
 ---
-- name: Connect to the server
-  hosts: servers
-  remote_user: root
+- name: Add server to hosts
+  hosts: localhost
   
   vars: 
     HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
@@ -19,6 +18,11 @@
         name: "{{ server_info.hcloud_server_info[0].ipv4_address }}"
         groups: servers
 
+- name: Manage server
+  hosts: servers
+  remote_user: root
+
+  tasks:
     - name: Wait for connection.
       wait_for_connection:
 
