@@ -8,7 +8,8 @@ env:
   HETZNER_TOKEN: ${{ secrets.HETZNER_TOKEN }}
   HETZNER_TYPE: cx11
   HETZNER_NAME: hryszko.dev
-  SSH_KEY: simon@hryszko.dev
+  HETZNER_SSH_KEY: simon@hryszko.dev
+  SSH_KEY_PRV: ${{ secrets.SSH_KEY }}
 
 jobs:
   set-up-server:
@@ -30,7 +31,7 @@ jobs:
       - name: Set up SSH-Agent
         uses: webfactory/ssh-agent@v0.4.1
         with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
+          ssh-private-key: "{{ SSH_KEY_PRV }}"
 
       - name: Create server
         run: ansible-playbook playbooks/create_server.yml
@@ -38,10 +39,13 @@ jobs:
           HETZNER_TOKEN: ${{ env.HETZNER_TOKEN }}
           HETZNER_TYPE: ${{ env.HETZNER_TYPE }}
           HETZNER_NAME: ${{ env.HETZNER_NAME }}
-          SSH_KEY: ${{ env.SSH_KEY }}
+          HETZNER_SSH_KEY: ${{ env.HETZNER_SSH_KEY }}
 
       - name: Add server to inventory
         run: ansible-playbook playbooks/add_server_to_inventory.yml
         env:
           HETZNER_TOKEN: ${{ env.HETZNER_TOKEN }}
           HETZNER_NAME: ${{ env.HETZNER_NAME }}
+
+      - name: Manage server
+        run: ansible-playbook playbooks/manage_server.yml

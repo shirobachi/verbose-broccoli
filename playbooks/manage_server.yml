@@ -1,0 +1,21 @@
+---
+- name: Connect to the server
+  hosts: servers
+  remote_user: root
+  
+  tasks:
+    - name: Wait for connection.
+      wait_for_connection:
+
+    - name: install ranger
+      apt:
+        name: 
+        - ranger
+        - git
+        - curl
+        - vim
+        state: latest
+        update_cache: yes
+        upgrade: yes
+        require:
+          - wait_for_connection

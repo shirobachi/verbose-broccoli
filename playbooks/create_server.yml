@@ -6,7 +6,7 @@
     HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
     HETZNER_TYPE: "{{ lookup('env', 'HETZNER_TYPE') }}"
     HETZNER_NAME: "{{ lookup('env', 'HETZNER_NAME') }}"
-    SSH_KEY: "{{ lookup('env', 'SSH_KEY') }}"
+    HETZNER_SSH_KEY: "{{ lookup('env', 'HETZNER_SSH_KEY') }}"
 
   tasks:
     - name: Retrieve server
@@ -22,8 +22,8 @@
         server_type: "{{ HETZNER_TYPE }}"
         image: ubuntu-20.04
         location: hel1
-        ssh_keys:
-          - "{{ SSH_KEY }}"
+        HETZNER_SSH_KEYs:
+          - "{{ HETZNER_SSH_KEY }}"
         state: present
       register: instance_data
       when: server_info.hcloud_server_info | length == 0
