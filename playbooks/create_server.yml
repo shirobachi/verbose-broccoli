@@ -1,0 +1,21 @@
+---
+- name: Create server
+  hosts: localhost
+
+  vars: 
+    HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
+    HETZNER_TYPE: "cx11"
+    SSH_KEY: "simon@hryszko.dev"
+
+  tasks:
+    - name: Create a new instance with an SSH key.
+      hetzner.hcloud.hcloud_server:
+        api_token: "{{ HETZNER_TOKEN }}"
+        name: "hryszko.dev"
+        server_type: "{{ HETZNER_TYPE }}"
+        image: ubuntu-20.04
+        location: hel1
+        ssh_keys:
+          - "{{ SSH_KEY }}"
+        state: present
+      register: instance_data
