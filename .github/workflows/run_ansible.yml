@@ -11,7 +11,7 @@ env:
   SSH_KEY: simon@hryszko.dev
 
 jobs:
-  create-server:
+  set-up-server:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,3 +39,9 @@ jobs:
           HETZNER_TYPE: ${{ env.HETZNER_TYPE }}
           HETZNER_NAME: ${{ env.HETZNER_NAME }}
           SSH_KEY: ${{ env.SSH_KEY }}
+
+      - name: Add server to inventory
+        run: ansible-playbook playbooks/add_server_to_inventory.yml
+        env:
+          HETZNER_TOKEN: ${{ env.HETZNER_TOKEN }}
+          HETZNER_NAME: ${{ env.HETZNER_NAME }}
