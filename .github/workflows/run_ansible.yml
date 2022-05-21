@@ -31,7 +31,7 @@ jobs:
       - name: Set up SSH-Agent
         uses: webfactory/ssh-agent@v0.4.1
         with:
-          ssh-private-key: "{{ SSH_KEY_PRV }}"
+          ssh-private-key: "{{ env.SSH_KEY_PRV }}"
 
       - name: Create server
         run: ansible-playbook playbooks/create_server.yml
