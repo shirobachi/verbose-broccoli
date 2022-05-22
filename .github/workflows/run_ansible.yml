@@ -32,7 +32,7 @@ jobs:
         run: echo "{{ SSH_KEY_PRV }}" > /ssh_key
 
       - name: chmod ssh key file
-        run: chmod 600 /ssh_key
+        run: chmod 600 ~/ssh_key
 
       - name: Set up SSH-Agent
         uses: webfactory/ssh-agent@v0.4.1
