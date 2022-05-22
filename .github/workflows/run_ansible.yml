@@ -33,6 +33,9 @@ jobs:
         with:
           ssh-private-key: "${{ env.SSH_KEY_PRV }}"
 
+      - name: sadasd
+        run: ssh root@engelbart.hryszko.dev
+
       - name: Create server
         run: ansible-playbook playbooks/create_server.yml
         env:
