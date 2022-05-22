@@ -1,21 +1,7 @@
 ---
-- name: Add server to hosts
-  hosts: localhost
-  
-  vars: 
-    HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
-    HETZNER_NAME: "{{ lookup('env', 'HETZNER_NAME') }}"
-  
-  tasks:
-    - name: Add host to inventory.
-      add_host:
-        name: "engelbart.hryszko.dev"
-        groups: servers
-
 - name: Manage server
   hosts: servers
   remote_user: root
-  gather_facts: False
 
   tasks:
     - name: install ranger

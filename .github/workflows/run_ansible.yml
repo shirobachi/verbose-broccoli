@@ -41,6 +41,9 @@ jobs:
           HETZNER_NAME: ${{ env.HETZNER_NAME }}
           HETZNER_SSH_KEY: ${{ env.HETZNER_SSH_KEY }}
 
+      - name: test connection
+        run: ansible -m ping all
+
       - name: Manage server
         run: ansible-playbook playbooks/manage_server.yml
         env:

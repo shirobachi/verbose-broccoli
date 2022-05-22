@@ -22,7 +22,7 @@
         server_type: "{{ HETZNER_TYPE }}"
         image: ubuntu-20.04
         location: hel1
-        HETZNER_SSH_KEYs:
+        ssh_keys:
           - "{{ HETZNER_SSH_KEY }}"
         state: present
       register: instance_data
