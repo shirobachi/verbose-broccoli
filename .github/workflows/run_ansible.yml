@@ -29,7 +29,7 @@ jobs:
         run: pip3 install --upgrade ansible
         
       - name: make ssh file
-        run: echo "{{ SSH_KEY_PRV }}" > /ssh_key
+        run: echo "{{ SSH_KEY_PRV }}" > ~/ssh_key
 
       - name: chmod ssh key file
         run: chmod 600 ~/ssh_key
