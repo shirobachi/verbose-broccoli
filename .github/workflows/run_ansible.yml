@@ -28,6 +28,12 @@ jobs:
       - name: Upgrade ansible
         run: pip3 install --upgrade ansible
         
+      - name: make ssh file
+        run: echo "{{ SSH_KEY_PRV }}" > /ssh_key
+
+      - name: chmod ssh key file
+        run: chmod 600 /ssh_key
+
       - name: Set up SSH-Agent
         uses: webfactory/ssh-agent@v0.4.1
         with:
@@ -42,7 +48,7 @@ jobs:
           HETZNER_SSH_KEY: ${{ env.HETZNER_SSH_KEY }}
 
       - name: test connection
-        run: ansible -m ping all
+        run: ansible -m ping all -vv
 
       - name: Manage server
         run: ansible-playbook playbooks/manage_server.yml

@@ -4,6 +4,9 @@
   remote_user: root
 
   tasks:
+    - name: wait for connection
+      wait_for_connection:
+      
     - name: install ranger
       apt:
         name: 
