@@ -10,8 +10,5 @@
     - name: install ranger
       apt:
         name: ranger
-        state: latest
-        update_cache: yes
-        upgrade: yes
         require:
           - wait_for_connection
