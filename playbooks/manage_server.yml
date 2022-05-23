@@ -37,6 +37,10 @@
         state: latest
         update_cache: yes
 
+    - name: Make docker group
+      group:
+        name: docker
+
     - name: Add new user called simon
       user:
         name: simon
