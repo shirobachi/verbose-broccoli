@@ -9,11 +9,7 @@
       
     - name: install ranger
       apt:
-        name: 
-        - ranger
-        - git
-        - curl
-        - vim
+        name: ranger
         state: latest
         update_cache: yes
         upgrade: yes
