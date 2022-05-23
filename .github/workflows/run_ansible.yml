@@ -29,7 +29,7 @@ jobs:
         run: pip3 install --upgrade ansible
 
       - name: sudo apt update && sudo apt install tree
-        run: apt-get install tree
+        run: sudo apt update && sudo apt install tree
 
       - name: ls tree
         run: tree ~
