@@ -79,8 +79,6 @@
         follow: yes
 
     - name: install docker
-      apt:
-        name: 
-        - docker-ce
-        state: latest
-        update_cache: yes
+      package:
+        name: docker-ce
+        state: present
