@@ -97,7 +97,7 @@
 
     - name: Prepare nginx-proxy-manager (copy file)
       copy:
-        src: ./playbooks/Templates/nginx-proxy-manager.yml
+        src: ./Templates/nginx-proxy-manager.yml
         dest: /opt/nginx-proxy-manager/docker-compose.yml
         owner: simon
         mode: 0600
