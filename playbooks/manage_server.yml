@@ -5,7 +5,6 @@
   vars: 
     HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
     HETZNER_NAME: "{{ lookup('env', 'HETZNER_NAME') }}"
-    PASSWORD: "{{ lookup('env', 'PASSWORD') }}"
 
   tasks:
     - name: Retrieve server
@@ -50,7 +49,6 @@
           - docker
         shell: /bin/bash
         home: /home/simon
-        password: "{{ lookup('env', 'PASSWORD') }}"
 
     - name: Make /home/simon/.ssh dir
       file:
