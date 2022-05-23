@@ -52,6 +52,11 @@
         home: /home/simon
         password: "{{ lookup('env', 'PASSWORD') }}"
 
+    - name: Make /home/simon/.ssh dir
+      file:
+        path: /home/simon/.ssh
+        state: directory
+
     - name: Copy root ssh key to new user
       copy:
         src: /root/.ssh/authorized_keys
