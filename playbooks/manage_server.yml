@@ -83,11 +83,8 @@
     - name: Install Docker
       ansible.builtin.shell: cd ~ && curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh && sudo rm get-docker.sh && sudo systemctl enable docker && sudo systemctl start docker
 
-    - name: Install Docker Compose v1
-      ansible.builtin.shell: curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose-v1 && sudo chmod +x /usr/local/bin/docker-compose-v1
-
-    - name: Install Docker Compose v2
-      ansible.builtin.shell: curl -L "https://github.com/docker/compose/releases/download/2.5.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
+    - name: Install Docker Compose
+      ansible.builtin.shell: curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
 
     - name: Make sure dir /opt exist
       file:
