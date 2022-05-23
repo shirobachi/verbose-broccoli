@@ -2,5 +2,5 @@
 engelbart.hryszko.dev
 
 
-[all:vars]
+[servers:vars]
 ansible_user=root
