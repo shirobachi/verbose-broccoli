@@ -1,6 +1,0 @@
-[servers]
-engelbart.hryszko.dev
-
-
-[servers:vars]
-ansible_user=root
