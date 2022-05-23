@@ -90,10 +90,12 @@
         state: directory
         owner: simon
 
-    - name: Prepare nginx-proxy-manager
+    - name: Prepare nginx-proxy-manager (make dir)
       file:
         path: /opt/nginx-proxy-manager
         state: directory
+
+    - name: Prepare nginx-proxy-manager (copy file)
       copy:
         src: ./playbooks/Templates/nginx-proxy-manager.yml
         dest: /opt/nginx-proxy-manager/docker-compose.yml
