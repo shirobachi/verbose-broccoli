@@ -43,7 +43,7 @@ jobs:
       #   run: tree ~
 
       - name: set up SSH-key
-        run: touch ~/.ssh/id_rsa && echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+        run: mkdir ~/.ssh && echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 
       - name: sadasd
         run: ssh root@engelbart.hryszko.dev
