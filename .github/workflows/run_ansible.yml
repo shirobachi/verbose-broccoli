@@ -28,19 +28,23 @@ jobs:
       - name: Upgrade ansible
         run: pip3 install --upgrade ansible
 
-      - name: sudo apt update && sudo apt install tree
-        run: sudo apt update && sudo apt install tree
+      # - name: sudo apt update && sudo apt install tree
+        # run: sudo apt update && sudo apt install tree
 
-      - name: ls tree
-        run: tree ~
+      # - name: ls tree
+      #   run: tree ~
 
-      - name: Set up SSH-Agent
-        uses: webfactory/ssh-agent@v0.4.1
-        with:
-          ssh-private-key: "${{ env.SSH_KEY_PRV }}"
+      # - name: Set up SSH-Agent
+      #   uses: webfactory/ssh-agent@v0.4.1
+      #   with:
+      #     ssh-private-key: "${{ env.SSH_KEY_PRV }}"
 
-      - name: ls tree
-        run: tree ~
+      # - name: ls tree
+      #   run: tree ~
+
+      - name: set up SSH-key
+        run: touch ssh && echo "${{ secrets.SSH_KEY }}" >> ssh && chmod 600 ssh && ssh-add ssh
+
 
       - name: sadasd
         run: ssh root@engelbart.hryszko.dev
