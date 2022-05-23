@@ -21,6 +21,7 @@
 - name: Manage server
   hosts: servers
   remote_user: root
+  gather_facts: False
 
   tasks:
     - name: wait for connection
