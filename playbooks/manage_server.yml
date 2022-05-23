@@ -15,4 +15,3 @@
         - curl
         - vim
         state: latest
-        update_cache: yes
