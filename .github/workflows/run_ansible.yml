@@ -28,10 +28,8 @@ jobs:
       - name: Upgrade ansible
         run: pip3 install --upgrade ansible
 
-      - name: Set up SSH-Agent
-        uses: webfactory/ssh-agent@v0.4.1
-        with:
-          ssh-private-key: "${{ env.SSH_KEY_PRV }}"
+      - name: install ssh-key from gh secrets.SSH_KEY
+        run: echo "{{ SSH_KEY_PRV }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 
       - name: sadasd
         run: ssh root@engelbart.hryszko.dev
