@@ -68,3 +68,12 @@
 
     - name: Run shell command
       shell: echo "#\!/bin/bash\nexport PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]] \[\e[31m\]\w\[\e[m\] \[\e[32m\]⇨\[\e[m\]  '" > /home/simon/.bashrc && curl https://raw.githubusercontent.com/Shirobachi/dot-files/main/.aliases | grep -e 'alias\|export' >> /home/simon/.bashrc
+
+    - name: Copy /home/simon/.bashrc to /root/.bashrc
+      copy:
+        src: /home/simon/.bashrc
+        dest: /root/.bashrc
+        owner: root
+        mode: 0600
+        remote_src: yes
+        follow: yes
