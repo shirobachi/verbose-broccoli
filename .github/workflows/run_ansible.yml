@@ -29,9 +29,6 @@ jobs:
       - name: Upgrade ansible
         run: pip3 install --upgrade ansible
 
-      - name: set up SSH-key
-        run: mkdir ~/.ssh && echo "${{ env.SSH_KEY_PRV }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
-
       - name: Create server
         run: ansible-playbook playbooks/create_server.yml
         env:
@@ -40,6 +37,9 @@ jobs:
           HETZNER_NAME: ${{ env.HETZNER_NAME }}
           HETZNER_SSH_KEY: ${{ env.HETZNER_SSH_KEY }}
           CLOUDFLARE_TOKEN: ${{ env.CLOUDFLARE_TOKEN }}
+
+      - name: set up SSH-key
+        run: mkdir ~/.ssh && echo "${{ env.SSH_KEY_PRV }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 
       - name: Manage server
         run: ansible-playbook playbooks/manage_server.yml
