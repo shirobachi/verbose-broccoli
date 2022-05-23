@@ -83,3 +83,23 @@
 
     - name: Install Docker Compose
       ansible.builtin.shell: curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
+
+    - name: Make sure dir /opt exist
+      file:
+        path: /opt
+        state: directory
+        owner: simon
+
+    - name: Prepare nginx-proxy-manager
+      steps:
+        - name: make directory for this '/opt/nginx-proxy-manager'
+          file:
+            path: /opt/nginx-proxy-manager
+            state: directory
+        - name: Copy docker-compose file
+          copy:
+            src: ./playbooks/Templates/nginx-proxy-manager.yml
+            dest: /opt/nginx-proxy-manager/docker-compose.yml
+            owner: simon
+            mode: 0600
+            follow: yes
