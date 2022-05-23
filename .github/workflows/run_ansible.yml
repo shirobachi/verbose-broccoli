@@ -45,8 +45,11 @@ jobs:
       - name: set up SSH-key
         run: mkdir ~/.ssh && echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 
-      - name: sadasd
-        run: ssh root@engelbart.hryszko.dev
+      - name: test connection
+        run: ansible -m ping all -v
+
+      # - name: sadasd
+      #   run: ssh root@engelbart.hryszko.dev
 
       - name: Create server
         run: ansible-playbook playbooks/create_server.yml
@@ -55,9 +58,6 @@ jobs:
           HETZNER_TYPE: ${{ env.HETZNER_TYPE }}
           HETZNER_NAME: ${{ env.HETZNER_NAME }}
           HETZNER_SSH_KEY: ${{ env.HETZNER_SSH_KEY }}
-
-      - name: test connection
-        run: ansible -m ping all -v
 
       - name: Manage server
         run: ansible-playbook playbooks/manage_server.yml
