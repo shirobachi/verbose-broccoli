@@ -39,4 +39,4 @@
         account_email: Szevaa.97@gmail.com
         api_token: "{{ CLOUDFLARE_TOKEN }}"
       register: record
-      when: instance_data is defined
+      when: instance_data | length > 0
