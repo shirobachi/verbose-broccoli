@@ -5,6 +5,7 @@
   vars: 
     HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
     HETZNER_NAME: "{{ lookup('env', 'HETZNER_NAME') }}"
+    PASSWORD: "{{ lookup('env', 'PASSWORD') }}"
 
   tasks:
     - name: Retrieve server
@@ -35,3 +36,26 @@
         - vim
         state: latest
         update_cache: yes
+
+    - name: Add new user called simon
+      user:
+        name: simon
+        state: present
+        groups:
+          - sudo
+          - docker
+        shell: /bin/bash
+        home: /home/simon
+        password: "{{ lookup('env', 'PASSWORD') }}"
+
+    - name: Copy root ssh key to new user
+      copy:
+        src: /root/.ssh/authorized_keys
+        dest: /home/simon/.ssh/authorized_keys
+        owner: simon
+        mode: 0600
+        remote_src: yes
+        follow: yes
+
+    - name: Run shell command
+      shell: echo -e "#\!/bin/bash\nexport PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]] \[\e[31m\]\w\[\e[m\] \[\e[32m\]⇨\[\e[m\]  '" > /home/simon/.bashrc && curl https://raw.githubusercontent.com/Shirobachi/dot-files/main/.aliases | grep -e 'alias\|export' | xargs -I{} echo "{}" >> /home/simon/.bashrc
