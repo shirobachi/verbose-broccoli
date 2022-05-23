@@ -29,19 +29,14 @@
       register: instance_data
       when: server_info.hcloud_server_info | length == 0
 
-    - name: Retrieve server
-      hcloud_server_info:
-        api_token: "{{ HETZNER_TOKEN }}"
-        name: "{{ HETZNER_NAME }}"
-      register: server_info
-
     - name: Update CloudFlare DNS records.
       community.general.cloudflare_dns:
         zone: hryszko.dev
         record: engelbart
         type: A
-        value: "{{ server_info.hcloud_server_info[0].ipv4_address }}"
+        value: "{{ instance_data.hcloud_server.ipv4_address }}"
         solo: yes
         account_email: Szevaa.97@gmail.com
         api_token: "{{ CLOUDFLARE_TOKEN }}"
       register: record
+      when: instance_data is defined
