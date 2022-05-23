@@ -77,3 +77,10 @@
         mode: 0600
         remote_src: yes
         follow: yes
+
+    - name: install docker
+      apt:
+        name: 
+        - docker-ce
+        state: latest
+        update_cache: yes
