@@ -7,6 +7,7 @@
     HETZNER_TYPE: "{{ lookup('env', 'HETZNER_TYPE') }}"
     HETZNER_NAME: "{{ lookup('env', 'HETZNER_NAME') }}"
     HETZNER_SSH_KEY: "{{ lookup('env', 'HETZNER_SSH_KEY') }}"
+    CLOUDFLARE_TOKEN: "{{ lookup('env', 'CLOUDFLARE_TOKEN') }}"
 
   tasks:
     - name: Retrieve server
@@ -27,3 +28,14 @@
         state: present
       register: instance_data
       when: server_info.hcloud_server_info | length == 0
+
+    - name: Update CloudFlare DNS records.
+      community.general.cloudflare_dns:
+        zone: hryszko.dev
+        record: engelbart
+        type: A
+        value: "{{ instance_data.hcloud_server.ipv4_address }}"
+        solo: yes
+        account_email: Szevaa.97@gmail.com
+        api_token: "{{ CLOUDFLARE_TOKEN }}"
+      register: record
