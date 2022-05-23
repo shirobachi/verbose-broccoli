@@ -38,12 +38,6 @@ jobs:
           HETZNER_SSH_KEY: ${{ env.HETZNER_SSH_KEY }}
           CLOUDFLARE_TOKEN: ${{ env.CLOUDFLARE_TOKEN }}
 
-      - name: Add server IP to group
-        run: ansible-playbook playbooks/add_server_to_group.yml
-        env:
-          HETZNER_TOKEN: ${{ env.HETZNER_TOKEN }}
-          HETZNER_NAME: ${{ env.HETZNER_NAME }}
-
       - name: set up SSH-key
         run: mkdir ~/.ssh && echo "${{ env.SSH_KEY_PRV }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 
