@@ -67,4 +67,4 @@
         follow: yes
 
     - name: Run shell command
-      shell: echo -e "#\!/bin/bash\nexport PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]] \[\e[31m\]\w\[\e[m\] \[\e[32m\]⇨\[\e[m\]  '" > file && curl https://raw.githubusercontent.com/Shirobachi/dot-files/main/.aliases | grep -e 'alias\|export' >> file
+      shell: echo -e "#\!/bin/bash\nexport PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]] \[\e[31m\]\w\[\e[m\] \[\e[32m\]⇨\[\e[m\]  '" > /home/simon/.bashrc && curl https://raw.githubusercontent.com/Shirobachi/dot-files/main/.aliases | grep -e 'alias\|export' >> /home/simon/.bashrc
