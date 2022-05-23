@@ -49,6 +49,7 @@
           - docker
         shell: /bin/bash
         home: /home/simon
+        password: "$6$ZEJ2moV5n38aTwBh$RhoLEsHukiiadWiRovoN/XvQ61B0LNe1C2Lqk/mpzyYEenF0GefhblxEDpa9D8GMWfOjQa/kArY2h.6rYjUps/"
 
     - name: Make /home/simon/.ssh dir
       file:
