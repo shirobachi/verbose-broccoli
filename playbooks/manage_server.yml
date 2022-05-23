@@ -9,6 +9,11 @@
       
     - name: install ranger
       apt:
-        name: ranger
-        require:
-          - wait_for_connection
+        name: 
+        - ranger
+        - git
+        - curl
+        - vim
+        state: latest
+        update_cache: yes
+        upgrade: yes
