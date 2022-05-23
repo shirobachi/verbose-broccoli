@@ -56,12 +56,14 @@
         path: /home/simon/.ssh
         state: directory
         owner: simon
+        group: simon
 
     - name: Copy root ssh key to new user
       copy:
         src: /root/.ssh/authorized_keys
         dest: /home/simon/.ssh/authorized_keys
         owner: simon
+        group: simon
         mode: 0600
         remote_src: yes
         follow: yes
@@ -81,24 +83,47 @@
     - name: Install Docker
       ansible.builtin.shell: cd ~ && curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh && sudo rm get-docker.sh && sudo systemctl enable docker && sudo systemctl start docker
 
-    - name: Install Docker Compose
-      ansible.builtin.shell: curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
+    - name: Install Docker Compose v1
+      ansible.builtin.shell: curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose-v1 && sudo chmod +x /usr/local/bin/docker-compose-v1
+
+    - name: Install Docker Compose v2
+      ansible.builtin.shell: curl -L "https://github.com/docker/compose/releases/download/2.5.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
 
     - name: Make sure dir /opt exist
       file:
         path: /opt
         state: directory
         owner: simon
+        group: simon
 
     - name: Prepare nginx-proxy-manager (make dir)
       file:
         path: /opt/nginx-proxy-manager
         state: directory
+        owner: simon
+        group: simon
 
     - name: Prepare nginx-proxy-manager (copy file)
       copy:
         src: ./Templates/nginx-proxy-manager.yml
         dest: /opt/nginx-proxy-manager/docker-compose.yml
         owner: simon
+        group: simon
+        mode: 0600
+        follow: yes
+
+    - name: Prepare portainer (make dir)
+      file:
+        path: /opt/portainer
+        state: directory
+        owner: simon
+        group: simon
+
+    - name: Prepare portainer (copy file)
+      copy:
+        src: ./Templates/portainer.yml
+        dest: /opt/portainer/docker-compose.yml
+        owner: simon
+        group: simon
         mode: 0600
         follow: yes
