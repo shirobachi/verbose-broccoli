@@ -120,7 +120,7 @@
           follow: yes
 
       - name: generate .env with random PASS, LOGIN and DB_NAME
-        shell: echo "PASS={{ lookup('random', '12') }}" > /opt/nginx-proxy-manager/.env && echo "LOGIN={{ lookup('random', '12') }}" >> /opt/nginx-proxy-manager/.env && echo "DB_NAME={{ lookup('random', '12') }}" >> /opt/nginx-proxy-manager/.env
+        shell: echo "PASS={{ lookup('community.general.random_string', length=48) }}" > /opt/nginx-proxy-manager/.env && echo "LOGIN={{ lookup('community.general.random_string', length=48) }}" >> /opt/nginx-proxy-manager/.env && echo "DB_NAME={{ lookup('community.general.random_string', length=48) }}" >> /opt/nginx-proxy-manager/.env
 
     - name: Prepare portainer
       block: 
