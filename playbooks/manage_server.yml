@@ -117,9 +117,6 @@
         mode: 0600
         follow: yes
 
-    - name: Prepare nginx-proxy-manager (run docker compose)
-      ansible.builtin.shell: cd /opt/nginx-proxy-manager && docker-compose up -d
-
     - name: Prepare portainer (make dir)
       file:
         path: /opt/portainer
@@ -135,6 +132,3 @@
         group: simon
         mode: 0600
         follow: yes
-
-    - name: Prepare portainer (run docker compose)
-      ansible.builtin.shell: cd /opt/portainer && docker-compose up -d
