@@ -102,7 +102,7 @@
         group: simon
 
     - name: Prepare nginx-proxy-manager
-    - block:
+      block:
       - name: make dir
         file:
           path: /opt/nginx-proxy-manager
@@ -123,7 +123,7 @@
         shell: echo "PASS={{ lookup('random', '12') }}" > /opt/nginx-proxy-manager/.env && echo "LOGIN={{ lookup('random', '12') }}" >> /opt/nginx-proxy-manager/.env && echo "DB_NAME={{ lookup('random', '12') }}" >> /opt/nginx-proxy-manager/.env
 
     - name: Prepare portainer
-    - block: 
+      block: 
       - name: make dir
         file:
           path: /opt/portainer
