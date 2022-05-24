@@ -26,6 +26,8 @@ services:
       MYSQL_PASSWORD: ${PASS}
     volumes:
       - ./data/mysql:/var/lib/mysql
+    networks:
+      - nginx-proxy-manager
 
 
 networks:
