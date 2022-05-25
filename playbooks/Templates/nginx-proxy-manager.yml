@@ -15,7 +15,7 @@ services:
       DB_MYSQL_NAME: ${DB_NAME}
     volumes:
       - ./data:/data
-      - ./letsencrypt:/etc/letszencrypt
+      - ./letsencrypt:/etc/letsencrypt
     networks:
       - nginx-proxy-manager
   db:
