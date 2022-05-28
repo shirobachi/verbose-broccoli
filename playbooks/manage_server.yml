@@ -4,7 +4,7 @@
 
   vars: 
     HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
-    HETZNER_NAME: "{{ lookup('env', 'HETZNER_NAME') }} | default=server"
+    HETZNER_NAME: "{{ lookup('env', 'HETZNER_NAME') || 'server' }}"
     USERNAME: "{{ lookup('env', 'USERNAME') }} | default=user"
 
   tasks:
