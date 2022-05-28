@@ -57,7 +57,6 @@
           - docker
         shell: /bin/bash
         home: /home/simon
-        password: "$6$ZEJ2moV5n38aTwBh$RhoLEsHukiiadWiRovoN/XvQ61B0LNe1C2Lqk/mpzyYEenF0GefhblxEDpa9D8GMWfOjQa/kArY2h.6rYjUps/" # sudo apt update && sudo apt install python3 python3-bcrypt && python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
 
     - name: Make /home/simon/.ssh dir
       file:
