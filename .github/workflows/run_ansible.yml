@@ -6,7 +6,7 @@ on:
 
 env: 
   HETZNER_TOKEN: ${{ secrets.HETZNER_TOKEN }}
-  HETZNER_TYPE: cx11
+  HETZNER_TYPE: ${{ secrets.HETZNER_SERVER_TYPE }} | default=cx11
   HETZNER_NAME: ${{ secrets.HETZNER_SERVER_NAME }} | default=server
   HETZNER_SSH_KEY: simon@hryszko.dev
   SSH_KEY_PRV: ${{ secrets.SSH_KEY }}
