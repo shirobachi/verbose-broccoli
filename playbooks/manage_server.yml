@@ -4,8 +4,8 @@
 
   vars: 
     HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
-    HETZNER_NAME: "{{ lookup('env', 'HETZNER_NAME') }} | default=server"
-    USERNAME: "{{ lookup('env', 'USERNAME') }} | default=user"
+    HETZNER_NAME: "{{ lookup('env', 'HETZNER_NAME')}}"
+    USERNAME: "{{ lookup('env', 'USERNAME') }}"
 
   tasks:
     - name: Retrieve server
