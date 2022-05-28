@@ -51,7 +51,7 @@
 
     - name: Add new user called {{ USERNAME }}
       user:
-        name: {{ USERNAME }}
+        name: "{{ USERNAME }}"
         state: present
         groups:
           - sudo
