@@ -6,12 +6,12 @@ on:
 
 env: 
   HETZNER_TOKEN: ${{ secrets.HETZNER_TOKEN }}
-  HETZNER_TYPE: ${{ secrets.HETZNER_SERVER_TYPE || cx11 }}
-  HETZNER_NAME: ${{ secrets.HETZNER_SERVER_NAME || server }}
+  HETZNER_TYPE: ${{ secrets.HETZNER_SERVER_TYPE || 'cx11' }}
+  HETZNER_NAME: ${{ secrets.HETZNER_SERVER_NAME || 'server' }}
   HETZNER_SSH_KEY: ${{ secrets.HETZNER_SSH_NAME }}
   SSH_KEY_PRV: ${{ secrets.SSH_KEY }}
   CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
-  USERNAME: ${{ secrets.USERNAME || user }}
+  USERNAME: ${{ secrets.USERNAME || 'user' }}
 
 jobs:
   set-up-server:
