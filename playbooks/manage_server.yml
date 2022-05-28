@@ -19,11 +19,6 @@
         name: "{{ server_info.hcloud_server_info[0].ipv4_address }}"
         groups: servers
 
-    - name: debug
-      debug:
-        var: 
-        - server_info
-
 - name: Manage server
   hosts: servers
   remote_user: root
