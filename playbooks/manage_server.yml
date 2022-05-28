@@ -180,3 +180,11 @@
           value: "50"
 
       when: swap_enabled.stdout.find('swappiness') == -1
+
+    - name: Remove sudo password asking from sudoers
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%sudo'
+        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+        validate: /usr/sbin/visudo -cf %s
