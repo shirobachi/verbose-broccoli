@@ -4,7 +4,8 @@
 
   vars: 
     HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
-    HETZNER_NAME: "{{ lookup('env', 'HETZNER_NAME') }}"
+    HETZNER_NAME: "{{ lookup('env', 'HETZNER_NAME') }} | default=server"
+    USERNAME: "{{ lookup('env', 'USERNAME') }} | default=user"
 
   tasks:
     - name: Retrieve server
@@ -48,39 +49,39 @@
       group:
         name: docker
 
-    - name: Add new user called simon
+    - name: Add new user called {{ USERNAME }}
       user:
-        name: simon
+        name: {{ USERNAME }}
         state: present
         groups:
           - sudo
           - docker
         shell: /bin/bash
-        home: /home/simon
+        home: /home/{{ USERNAME }}
 
-    - name: Make /home/simon/.ssh dir
+    - name: Make /home/{{ USERNAME }}/.ssh dir
       file:
-        path: /home/simon/.ssh
+        path: /home/{{ USERNAME }}/.ssh
         state: directory
-        owner: simon
-        group: simon
+        owner: {{ USERNAME }}
+        group: {{ USERNAME }}
 
     - name: Copy root ssh key to new user
       copy:
         src: /root/.ssh/authorized_keys
-        dest: /home/simon/.ssh/authorized_keys
-        owner: simon
-        group: simon
+        dest: /home/{{ USERNAME }}/.ssh/authorized_keys
+        owner: {{ USERNAME }}
+        group: {{ USERNAME }}
         mode: 0600
         remote_src: yes
         follow: yes
 
     - name: Run shell command
-      shell: echo "#\!/bin/bash\nexport PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]] \[\e[31m\]\w\[\e[m\] \[\e[32m\]⇨\[\e[m\]  '" > /home/simon/.bashrc && curl https://raw.githubusercontent.com/Shirobachi/dot-files/main/.aliases | grep -e 'alias\|export' >> /home/simon/.bashrc
+      shell: echo "#\!/bin/bash\nexport PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]] \[\e[31m\]\w\[\e[m\] \[\e[32m\]⇨\[\e[m\]  '" > /home/{{ USERNAME }}/.bashrc && curl https://raw.githubusercontent.com/Shirobachi/dot-files/main/.aliases | grep -e 'alias\|export' >> /home/{{ USERNAME }}/.bashrc
 
-    - name: Copy /home/simon/.bashrc to /root/.bashrc
+    - name: Copy /home/{{ USERNAME }}/.bashrc to /root/.bashrc
       copy:
-        src: /home/simon/.bashrc
+        src: /home/{{ USERNAME }}/.bashrc
         dest: /root/.bashrc
         owner: root
         mode: 0600
@@ -97,8 +98,8 @@
       file:
         path: /opt
         state: directory
-        owner: simon
-        group: simon
+        owner: {{ USERNAME }}
+        group: {{ USERNAME }}
 
     - name: Prepare nginx-proxy-manager
       block:
@@ -106,15 +107,15 @@
         file:
           path: /opt/nginx-proxy-manager
           state: directory
-          owner: simon
-          group: simon
+          owner: {{ USERNAME }}
+          group: {{ USERNAME }}
 
       - name: copy file
         copy:
           src: ./Templates/nginx-proxy-manager.yml
           dest: /opt/nginx-proxy-manager/docker-compose.yml
-          owner: simon
-          group: simon
+          owner: {{ USERNAME }}
+          group: {{ USERNAME }}
           mode: 0600
           follow: yes
 
@@ -130,15 +131,15 @@
         file:
           path: /opt/portainer
           state: directory
-          owner: simon
-          group: simon
+          owner: {{ USERNAME }}
+          group: {{ USERNAME }}
 
       - name: copy file
         copy:
           src: ./Templates/portainer.yml
           dest: /opt/portainer/docker-compose.yml
-          owner: simon
-          group: simon
+          owner: {{ USERNAME }}
+          group: {{ USERNAME }}
           mode: 0600
           follow: yes
 
