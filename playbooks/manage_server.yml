@@ -51,7 +51,7 @@
 
     - name: Add new user called {{ USERNAME }}
       user:
-        name: {{ USERNAME }}
+        name: "{{ USERNAME }}"
         state: present
         groups:
           - sudo
@@ -63,15 +63,15 @@
       file:
         path: /home/{{ USERNAME }}/.ssh
         state: directory
-        owner: {{ USERNAME }}
-        group: {{ USERNAME }}
+        owner: "{{ USERNAME }}"
+        group: "{{ USERNAME }}"
 
     - name: Copy root ssh key to new user
       copy:
         src: /root/.ssh/authorized_keys
         dest: /home/{{ USERNAME }}/.ssh/authorized_keys
-        owner: {{ USERNAME }}
-        group: {{ USERNAME }}
+        owner: "{{ USERNAME }}"
+        group: "{{ USERNAME }}"
         mode: 0600
         remote_src: yes
         follow: yes
@@ -98,8 +98,8 @@
       file:
         path: /opt
         state: directory
-        owner: {{ USERNAME }}
-        group: {{ USERNAME }}
+        owner: "{{ USERNAME }}"
+        group: "{{ USERNAME }}"
 
     - name: Prepare nginx-proxy-manager
       block:
@@ -107,15 +107,15 @@
         file:
           path: /opt/nginx-proxy-manager
           state: directory
-          owner: {{ USERNAME }}
-          group: {{ USERNAME }}
+          owner: "{{ USERNAME }}"
+          group: "{{ USERNAME }}"
 
       - name: copy file
         copy:
           src: ./Templates/nginx-proxy-manager.yml
           dest: /opt/nginx-proxy-manager/docker-compose.yml
-          owner: {{ USERNAME }}
-          group: {{ USERNAME }}
+          owner: "{{ USERNAME }}"
+          group: "{{ USERNAME }}"
           mode: 0600
           follow: yes
 
@@ -131,15 +131,15 @@
         file:
           path: /opt/portainer
           state: directory
-          owner: {{ USERNAME }}
-          group: {{ USERNAME }}
+          owner: "{{ USERNAME }}"
+          group: "{{ USERNAME }}"
 
       - name: copy file
         copy:
           src: ./Templates/portainer.yml
           dest: /opt/portainer/docker-compose.yml
-          owner: {{ USERNAME }}
-          group: {{ USERNAME }}
+          owner: "{{ USERNAME }}"
+          group: "{{ USERNAME }}"
           mode: 0600
           follow: yes
 
