@@ -21,7 +21,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         
-      - name: Exit if HETZNER_TOKEN is not set
+      - name: Exit if required SECRETS are not set
         run: echo "You need to have at least following SECRET HETZNER_TOKEN, HETZNER_SSH_KEY "; exit 1
         if: ${{ env.HETZNER_TOKEN  == '' || env.HETZNER_SSH_KEY == ''}}
 
