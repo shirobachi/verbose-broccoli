@@ -40,7 +40,7 @@
         type: A
         value: "{{ instance_data.hcloud_server.ipv4_address }}"
         solo: yes
-        account_email: "{{ CLOUDFLARE_EMAIL }}"
+        account_email: "{{ CLOUDFLARE_EMAIL }}" #TODO: this might be unnecessary
         api_token: "{{ CLOUDFLARE_TOKEN }}"
       register: record
-      when: instance_data.hcloud_server.ipv4_address is defined and CLOUDFLARE_TOKEN is defined and CLOUDFLARE_ZONE is defined and CLOUDFLARE_EMAIL is defined
+      when: instance_data.hcloud_server.ipv4_address is defined and CLOUDFLARE_TOKEN != '' and CLOUDFLARE_ZONE != '' and CLOUDFLARE_EMAIL != ''
