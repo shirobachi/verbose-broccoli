@@ -20,6 +20,15 @@
         name: "{{ HETZNER_SERVER_NAME }}"
       register: server_info
 
+    - name: Make firewall what open port 81
+      hcloud_firewall:
+        api_token: "{{ HETZNER_TOKEN }}"
+        name: "Nginx-proxy-manager"
+        rules:
+          - port: 81
+            protocol: tcp
+      register: firewall
+
     - name: Create a new instance with an SSH key.
       hetzner.hcloud.hcloud_server:
         api_token: "{{ HETZNER_TOKEN }}"
@@ -27,6 +36,7 @@
         server_type: "{{ HETZNER_SERVER_TYPE }}"
         image: ubuntu-20.04
         location: "{{ HETZNER_SERVER_LOCATION }}"
+        firewall: firewall.hcloud_firewall.id
         ssh_keys:
           - "{{ HETZNER_SSH_NAME }}"
         state: present
