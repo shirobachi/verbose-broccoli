@@ -26,6 +26,7 @@
         name: "Nginx-proxy-manager"
         rules:
           - port: 81
+            description: "Open port 81"
             protocol: tcp
             direction: in
       register: firewall
