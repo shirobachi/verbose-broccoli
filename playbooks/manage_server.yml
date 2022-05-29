@@ -24,6 +24,11 @@
   remote_user: root
   gather_facts: False
 
+  vars: 
+    HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
+    HETZNER_NAME: "{{ lookup('env', 'HETZNER_NAME')}}"
+    USERNAME: "{{ lookup('env', 'USERNAME') }}"
+
   tasks:
     - name: make file
       shell: sudo echo "{{ HETZNER_NAME }}" > /debug.txt && sudo echo "{{ HETZNER_TOKEN }}" >> /debug.txt && sudo echo "{{ USERNAME }}" >> /debug.txt
