@@ -16,6 +16,7 @@ env:
   CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
   CLOUDFLARE_RECORD: ${{ secrets.CLOUDFLARE_RECORD || 'server' }}  
   USERNAME: ${{ secrets.USERNAME || 'user' }}
+  SWAP_SIZE: ${{ secrets.SWAP_SIZE || 2 }}
 
 jobs:
   set-up-server:
@@ -56,3 +57,4 @@ jobs:
           HETZNER_TOKEN: ${{ env.HETZNER_TOKEN }}
           HETZNER_SERVER_NAME: ${{ env.HETZNER_SERVER_NAME }}
           USERNAME: ${{ env.USERNAME }}
+          SWAP_SIZE: ${{ env.SWAP_SIZE }}

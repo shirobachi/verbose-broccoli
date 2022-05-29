@@ -27,6 +27,7 @@
     HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
     HETZNER_SERVER_NAME: "{{ lookup('env', 'HETZNER_SERVER_NAME')}}"
     USERNAME: "{{ lookup('env', 'USERNAME') }}"
+    SWAP_SIZE: "{{ lookup('env', 'SWAP_SIZE') }}"
 
   tasks:
     - name: wait for connection
@@ -151,7 +152,7 @@
 
     - block:
       - name: create swap file
-        command: dd if=/dev/zero of=/swapfile bs=1G count=2
+        command: dd if=/dev/zero of=/swapfile bs=1G count={{SWAP_SIZE}}
 
       - name: change permission type
         file: path=/swapfile mode=600 state=file
