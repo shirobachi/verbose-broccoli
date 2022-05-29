@@ -3,6 +3,7 @@
 ## Description 📙
 Hey, thanks for using this package! This script will help you make server on hetzner with all needed staff for beginners. You can watch below video to get more information about this script or keep reading 📖
 Video will be added soon ;)
+If you like this repo, please consider starring it on [GitHub](https://github.com/Shirobachi/verbose-broccoli)
 
 ## Secret variables 🤫
 ---
