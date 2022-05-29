@@ -5,7 +5,7 @@ services:
     container_name: nginx-proxy-manager
     ports:
       - '80:80'
-      - '6969:81'
+      - '81:81'
       - '443:443'
     environment:
       DB_MYSQL_HOST: "db"
