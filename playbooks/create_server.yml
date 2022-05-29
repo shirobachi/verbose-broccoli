@@ -29,6 +29,9 @@
             description: "Open port 81"
             protocol: tcp
             direction: in
+            source_ips:
+              - 0.0.0.0/0
+              - ::/0
       register: firewall
 
     - name: Create a new instance with an SSH key.
