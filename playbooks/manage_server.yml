@@ -30,7 +30,6 @@
   tasks:
     - name: wait for connection
       wait_for_connection:
-        delay: 30
         connect_timeout: 30
       
     - name: install ranger
