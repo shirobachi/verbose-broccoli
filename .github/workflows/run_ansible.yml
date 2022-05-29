@@ -6,10 +6,10 @@ on:
 
 env: 
   HETZNER_TOKEN: ${{ secrets.HETZNER_TOKEN }}
-  HETZNER_TYPE: ${{ secrets.HETZNER_SERVER_TYPE || 'cx11' }}
-  HETZNER_NAME: ${{ secrets.HETZNER_SERVER_NAME || 'server' }}
-  HETZNER_SSH_KEY: ${{ secrets.HETZNER_SSH_NAME }}
-  SSH_KEY_PRV: ${{ secrets.SSH_KEY }}
+  HETZNER_SERVER_TYPE: ${{ secrets.HETZNER_SERVER_TYPE || 'cx11' }}
+  HETZNER_SERVER_NAME: ${{ secrets.HETZNER_SERVER_NAME || 'server' }}
+  HETZNER_SSH_NAME: ${{ secrets.HETZNER_SSH_NAME }}
+  SSH_KEY: ${{ secrets.SSH_KEY }}
   CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
   USERNAME: ${{ secrets.USERNAME || 'user' }}
 
@@ -22,8 +22,8 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Exit if required SECRETS are not set
-        run: echo "You need to have at least following SECRET HETZNER_TOKEN, HETZNER_SSH_KEY "; exit 1
-        if: ${{ env.HETZNER_TOKEN  == '' || env.HETZNER_SSH_KEY == ''}}
+        run: echo "You need to have at least following SECRET HETZNER_TOKEN, HETZNER_SSH_NAME "; exit 1
+        if: ${{ env.HETZNER_TOKEN  == '' || env.HETZNER_SSH_NAME == ''}}
 
       - name: Install Ansible Galaxy collections
         run:  ansible-galaxy collection install hetzner.hcloud community.general
@@ -38,17 +38,17 @@ jobs:
         run: ansible-playbook playbooks/create_server.yml
         env:
           HETZNER_TOKEN: ${{ env.HETZNER_TOKEN }}
-          HETZNER_TYPE: ${{ env.HETZNER_TYPE }}
-          HETZNER_NAME: ${{ env.HETZNER_NAME }}
-          HETZNER_SSH_KEY: ${{ env.HETZNER_SSH_KEY }}
+          HETZNER_SERVER_TYPE: ${{ env.HETZNER_SERVER_TYPE }}
+          HETZNER_SERVER_NAME: ${{ env.HETZNER_SERVER_NAME }}
+          HETZNER_SSH_NAME: ${{ env.HETZNER_SSH_NAME }}
           CLOUDFLARE_TOKEN: ${{ env.CLOUDFLARE_TOKEN }}
 
       - name: set up SSH-key
-        run: mkdir ~/.ssh && echo "${{ env.SSH_KEY_PRV }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+        run: mkdir ~/.ssh && echo "${{ env.SSH_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 
       - name: Manage server
         run: ansible-playbook playbooks/manage_server.yml
         env:
           HETZNER_TOKEN: ${{ env.HETZNER_TOKEN }}
-          HETZNER_NAME: ${{ env.HETZNER_NAME }}
+          HETZNER_SERVER_NAME: ${{ env.HETZNER_SERVER_NAME }}
           USERNAME: ${{ env.USERNAME }}
