@@ -8,9 +8,6 @@
     USERNAME: "{{ lookup('env', 'USERNAME') }}"
 
   tasks:
-    - name: make file
-      shell: echo "{{ HETZNER_NAME }}" > /debug.txt && echo "{{ HETZNER_TOKEN }}" >> /debug.txt && echo "{{ USERNAME }}" >> /debug.txt
-
     - name: Retrieve server
       hcloud_server_info:
         api_token: "{{ HETZNER_TOKEN }}"
@@ -28,6 +25,9 @@
   gather_facts: False
 
   tasks:
+    - name: make file
+      shell: sudo echo "{{ HETZNER_NAME }}" > /debug.txt && sudo echo "{{ HETZNER_TOKEN }}" >> /debug.txt && sudo echo "{{ USERNAME }}" >> /debug.txt
+
     - name: wait for connection
       wait_for_connection:
         delay: 30
