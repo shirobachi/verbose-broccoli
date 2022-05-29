@@ -21,6 +21,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         
+      - name: Exit if HETZNER_TOKEN is not set
+        run: echo "You need to have at least following SECRET HETZNER_TOKEN, HETZNER_SSH_KEY "; exit 1
+        if: "{{ HETZNER_TOKEN  == '' || HETZNER_SSH_KEY == ''}}"
+
       - name: Install Ansible Galaxy collections
         run:  ansible-galaxy collection install hetzner.hcloud community.general
 
