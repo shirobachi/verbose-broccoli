@@ -22,7 +22,7 @@ Video will be added soon ;)
 |SWAP_SIZE | How many GB of swap | False | 2 | N/A |
 
 ## Usage 🪝
-Fork this repo and set all mandatory (or more variables as you wish) variables. Then go to GitHub repo / actions and run the action.
+Fork this repo and set all mandatory (or more as you wish) variables. Then go to GitHub repo / actions and run the action.
 
 ## License 📝
 MIT
