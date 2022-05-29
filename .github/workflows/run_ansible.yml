@@ -45,8 +45,13 @@ jobs:
           HETZNER_TOKEN: ${{ env.HETZNER_TOKEN }}
           HETZNER_SERVER_TYPE: ${{ env.HETZNER_SERVER_TYPE }}
           HETZNER_SERVER_NAME: ${{ env.HETZNER_SERVER_NAME }}
+          HETZNER_SERVER_LOCATION: ${{ env.HETZNER_SERVER_LOCATION }}
           HETZNER_SSH_NAME: ${{ env.HETZNER_SSH_NAME }}
+          SSH_KEY: ${{ env.SSH_KEY }}
           CLOUDFLARE_TOKEN: ${{ env.CLOUDFLARE_TOKEN }}
+          CLOUDFLARE_ZONE: ${{ env.CLOUDFLARE_ZONE }}
+          CLOUDFLARE_EMAIL: ${{ env.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_RECORD: ${{ env.CLOUDFLARE_RECORD }}
 
       - name: set up SSH-key
         run: mkdir ~/.ssh && echo "${{ env.SSH_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa

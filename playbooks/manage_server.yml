@@ -24,8 +24,6 @@
   gather_facts: False
 
   vars: 
-    HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
-    HETZNER_SERVER_NAME: "{{ lookup('env', 'HETZNER_SERVER_NAME')}}"
     USERNAME: "{{ lookup('env', 'USERNAME') }}"
     SWAP_SIZE: "{{ lookup('env', 'SWAP_SIZE') }}"
 
@@ -76,7 +74,7 @@
         remote_src: yes
         follow: yes
 
-    - name: Run shell command
+    - name: Make nice PS1 and some aliases and exports
       shell: echo "#\!/bin/bash\nexport PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]] \[\e[31m\]\w\[\e[m\] \[\e[32m\]⇨\[\e[m\]  '" > /home/{{ USERNAME }}/.bashrc && curl https://raw.githubusercontent.com/Shirobachi/dot-files/main/.aliases | grep -e 'alias\|export' >> /home/{{ USERNAME }}/.bashrc
 
     - name: Copy /home/{{ USERNAME }}/.bashrc to /root/.bashrc
