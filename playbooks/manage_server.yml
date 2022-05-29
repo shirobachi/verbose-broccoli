@@ -24,6 +24,8 @@
   gather_facts: False
 
   vars: 
+    HETZNER_TOKEN: "{{ lookup('env', 'HETZNER_TOKEN') }}"
+    HETZNER_SERVER_NAME: "{{ lookup('env', 'HETZNER_SERVER_NAME')}}"
     USERNAME: "{{ lookup('env', 'USERNAME') }}"
     SWAP_SIZE: "{{ lookup('env', 'SWAP_SIZE') }}"
 
@@ -121,6 +123,16 @@
 
       - name: Run docker-compose
         ansible.builtin.shell: cd /opt/nginx-proxy-manager && docker-compose up -d
+
+      - name: Open port 81 via hetzner
+        hetzner_firewall_rule:
+          api_token: "{{ HETZNER_TOKEN }}"
+          server_name: "{{ HETZNER_SERVER_NAME }}"
+          port: 81
+          protocol: tcp
+          action: accept
+          description: "Nginx proxy manager"
+          state: present
 
     - name: Prepare portainer
       block: 
