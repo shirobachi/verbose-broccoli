@@ -8,9 +8,13 @@ env:
   HETZNER_TOKEN: ${{ secrets.HETZNER_TOKEN }}
   HETZNER_SERVER_TYPE: ${{ secrets.HETZNER_SERVER_TYPE || 'cx11' }}
   HETZNER_SERVER_NAME: ${{ secrets.HETZNER_SERVER_NAME || 'server' }}
+  HETZNER_SERVER_LOCATION: ${{ secrets.HETZNER_SERVER_LOCATION || 'hel1' }}
   HETZNER_SSH_NAME: ${{ secrets.HETZNER_SSH_NAME }}
   SSH_KEY: ${{ secrets.SSH_KEY }}
   CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+  CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+  CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+  CLOUDFLARE_RECORD: ${{ secrets.CLOUDFLARE_RECORD || 'server' }}  
   USERNAME: ${{ secrets.USERNAME || 'user' }}
 
 jobs:
