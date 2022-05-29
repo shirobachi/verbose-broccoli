@@ -8,6 +8,16 @@
     USERNAME: "{{ lookup('env', 'USERNAME') }}"
 
   tasks:
+    - name: debug env vars HETZNER_TOKEN
+      debug:
+        msg: "HETZNER_TOKEN: {{ HETZNER_TOKEN }}"
+    - name: debug env vars HETZNER_NAME
+      debug:
+        msg: "HETZNER_NAME: {{ HETZNER_NAME }}"
+    - name: debug env vars USERNAME
+      debug:
+        msg: "USERNAME: {{ USERNAME }}"
+
     - name: Retrieve server
       hcloud_server_info:
         api_token: "{{ HETZNER_TOKEN }}"
