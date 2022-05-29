@@ -39,4 +39,4 @@
         account_email: Szevaa.97@gmail.com
         api_token: "{{ CLOUDFLARE_TOKEN }}"
       register: record
-      when: instance_data.hcloud_server.ipv4_address is defined
+      when: instance_data.hcloud_server.ipv4_address is defined and CLOUDFLARE_TOKEN is defined
