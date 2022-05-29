@@ -21,12 +21,13 @@
       register: server_info
 
     - name: Make firewall what open port 81
-      hcloud_firewall:
+      hetzner.hcloud.hcloud_firewall:
         api_token: "{{ HETZNER_TOKEN }}"
         name: "Nginx-proxy-manager"
         rules:
           - port: 81
             protocol: tcp
+            direction: in
       register: firewall
 
     - name: Create a new instance with an SSH key.
