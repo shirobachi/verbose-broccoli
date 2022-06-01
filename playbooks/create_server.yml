@@ -62,6 +62,22 @@
               - ::/0
       register: firewall_required
 
+    - name: debug 'firewall_npm'
+      debug:
+        var: firewall_npm.hcloud_firewall.id
+
+    - name: debug 'firewall_npm'
+      debug:
+        var: firewall_required.hcloud_firewall.id
+
+    - name: debug 'firewall_npm'
+      debug:
+        var: firewall_npm
+
+    - name: debug 'firewall_npm'
+      debug:
+        var: firewall_required
+
     - name: Create a new instance with an SSH key.
       hetzner.hcloud.hcloud_server:
         api_token: "{{ HETZNER_TOKEN }}"
