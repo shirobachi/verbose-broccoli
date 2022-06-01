@@ -94,6 +94,10 @@
       register: instance_data
       when: server_info.hcloud_server_info | length == 0
 
+    - name: debug 'instance_data'
+      debug:
+        var: instance_data
+
     - name: wait for connection
       wait_for_connection:
         connect_timeout: 30
