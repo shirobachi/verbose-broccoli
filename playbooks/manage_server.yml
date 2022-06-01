@@ -118,9 +118,6 @@
           mode: 0600
           follow: yes
 
-      - name: generate .env with random PASS, LOGIN and DB_NAME
-        shell: echo "PASS={{ lookup('community.general.random_string', length=48, upper=true, numbers=false, special=false) }}" > /opt/nginx-proxy-manager/.env && echo "LOGIN={{ lookup('community.general.random_string', length=48, upper=true, numbers=false, special=false) }}" >> /opt/nginx-proxy-manager/.env && echo "DB_NAME={{ lookup('community.general.random_string', length=48, upper=true, numbers=false, special=false) }}" >> /opt/nginx-proxy-manager/.env
-
       - name: Run docker-compose
         ansible.builtin.shell: cd /opt/nginx-proxy-manager && docker-compose down; docker-compose up -d
 
