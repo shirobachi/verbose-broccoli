@@ -13,23 +13,12 @@ services:
       DB_MYSQL_USER: ${LOGIN}
       DB_MYSQL_PASSWORD: ${PASS}
       DB_MYSQL_NAME: ${DB_NAME}
+      DB_SQLITE_FILE: "/data/database.sqlite"
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
     networks:
       - nginx-proxy-manager
-  db:
-    image: 'jc21/mariadb-aria:latest'
-    environment:
-      MYSQL_ROOT_PASSWORD: 'npm'
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${LOGIN}
-      MYSQL_PASSWORD: ${PASS}
-    volumes:
-      - ./data/mysql:/var/lib/mysql
-    networks:
-      - nginx-proxy-manager
-
 
 networks:
   nginx-proxy-manager:
