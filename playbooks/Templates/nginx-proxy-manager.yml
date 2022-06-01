@@ -10,9 +10,6 @@ services:
     environment:
       DB_MYSQL_HOST: "db"
       DB_MYSQL_PORT: 3306
-      DB_MYSQL_USER: ${LOGIN}
-      DB_MYSQL_PASSWORD: ${PASS}
-      DB_MYSQL_NAME: ${DB_NAME}
       DB_SQLITE_FILE: "/data/database.sqlite"
     volumes:
       - ./data:/data
