@@ -178,7 +178,7 @@
           name: vm.vfs_cache_pressure
           value: "50"
 
-      when: swap_enabled.stdout.find('swappiness') == -1 and {{ SWAP_SIZE }} > 0
+      when: swap_enabled.stdout.find('swappiness') == -1 and SWAP_SIZE > 0
 
     - name: Remove sudo password asking from sudoers
       lineinfile:
