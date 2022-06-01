@@ -85,9 +85,9 @@
         server_type: "{{ HETZNER_SERVER_TYPE }}"
         image: ubuntu-20.04
         location: "{{ HETZNER_SERVER_LOCATION }}"
-        firewalls: 
-        - "{{ firewall_npm.hcloud_firewall.id }}"
-        - "{{ firewall_required.hcloud_firewall.id }}"
+        firewalls:
+          - "{{ firewall_npm.hcloud_firewall.id }}"
+          - "{{ firewall_required.hcloud_firewall.id }}"
         ssh_keys:
           - "{{ HETZNER_SSH_NAME }}"
         state: present
