@@ -32,11 +32,35 @@
             source_ips:
               - 0.0.0.0/0
               - ::/0
-      register: firewall
+      register: firewall_npm
 
-    - name: debug
-      debug:
-        var: firewall.hcloud_firewall.id
+    - name: Make firewall what open port 80, 443, 22
+      hetzner.hcloud.hcloud_firewall:
+        api_token: "{{ HETZNER_TOKEN }}"
+        name: "Required"
+        rules:
+          - port: 80
+            description: "HTTP"
+            protocol: tcp
+            direction: in
+            source_ips:
+              - 0.0.0.0/0
+              - ::/0
+          - port: 443
+            description: "HTTPS"
+            protocol: tcp
+            direction: in
+            source_ips:
+              - 0.0.0.0/0
+              - ::/0
+          - port: 22
+            description: "SSH"
+            protocol: tcp
+            direction: in
+            source_ips:
+              - 0.0.0.0/0
+              - ::/0
+      register: firewall_required
 
     - name: Create a new instance with an SSH key.
       hetzner.hcloud.hcloud_server:
@@ -45,7 +69,9 @@
         server_type: "{{ HETZNER_SERVER_TYPE }}"
         image: ubuntu-20.04
         location: "{{ HETZNER_SERVER_LOCATION }}"
-        firewalls: "{{ firewall.hcloud_firewall.id }}"
+        firewalls: 
+        - "{{ firewall_npm.hcloud_firewall.id }}"
+        - "{{ firewall_required.hcloud_firewall.id }}"
         ssh_keys:
           - "{{ HETZNER_SSH_NAME }}"
         state: present
