@@ -34,6 +34,10 @@
               - ::/0
       register: firewall
 
+    - name: debug
+      debug:
+        var: firewall.hcloud_firewall.id
+
     - name: Create a new instance with an SSH key.
       hetzner.hcloud.hcloud_server:
         api_token: "{{ HETZNER_TOKEN }}"
