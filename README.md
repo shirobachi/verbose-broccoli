@@ -1,7 +1,5 @@
 # Verbose brocoli 🥦
-<center>
-	<img src="logo.png" alt="logo.png does not found!" />
-</center>
+![logo.png does not found!](logo.png)
 
 ## Description 📙
 
